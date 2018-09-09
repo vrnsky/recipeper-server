@@ -1,0 +1,15 @@
+﻿<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.vrnsky.recipeper-server</groupId>
+    <artifactId>frontend</artifactId>
+    <name>frontend</name>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>me.vrnsky</groupId>
+        <artifactId>recipeper-server</artifactId>
+        <version>1.0</version>
+    </parent>
+
+</project>
