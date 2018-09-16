@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar backend/target/backend-0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -Dspring.datasource.url=postgres://vueyaubptdzntf:b6b8d44348cb75a149710a28688d0aff6d12b531577318a5ee5849698fec6dd9@ec2-54-247-79-32.eu-west-1.compute.amazonaws.com:5432/dfu4rtskm4oetr -jar backend/target/backend-0.1-SNAPSHOT.jar
