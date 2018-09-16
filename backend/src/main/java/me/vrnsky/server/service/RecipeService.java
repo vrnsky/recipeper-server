@@ -39,9 +39,6 @@ public class RecipeService {
     }
 
     public List<Recipe> list() {
-        for (Recipe recipe : recipeRepo.findAll()) {
-            logger.debug(recipe.toString());
-        }
         return recipeRepo.findAll();
     }
 }
