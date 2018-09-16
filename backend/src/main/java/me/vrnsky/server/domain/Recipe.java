@@ -2,6 +2,7 @@ package me.vrnsky.server.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "recipes")
+@ToString
 public class Recipe {
 
     @Id

@@ -44,12 +44,11 @@ public class UserServiceTest {
         assertThat(actual, is(user));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void whenDeleteUserShouldCheckThatUserWasDeleted() {
         User user = new User("admin", "admin");
         userService.registerOrUpdate(user);
         userService.deleteUser(user);
         User actual = userService.getById(user.getId());
-        assertThat(actual, is(nullValue()));
     }
 }

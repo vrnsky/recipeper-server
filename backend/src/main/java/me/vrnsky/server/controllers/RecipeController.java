@@ -1,10 +1,9 @@
 package me.vrnsky.server.controllers;
 
 import me.vrnsky.server.domain.Recipe;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import me.vrnsky.server.service.RecipeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,24 +12,35 @@ import java.util.List;
 @RequestMapping("/recipe")
 public class RecipeController {
 
+    private RecipeService recipeService;
+
+    @Autowired
+    public RecipeController(RecipeService service) {
+        this.recipeService = service;
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Recipe addRecipe() {
-        return new Recipe();
+    public void addRecipe(@ModelAttribute Recipe recipe) {
+        recipeService.create(recipe);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
     public List<Recipe> list() {
-        return new ArrayList<>();
+        return recipeService.list();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Recipe getById(@PathVariable("id") int id) {
-        return new Recipe();
+    @ResponseBody
+    public Recipe getById(@PathVariable Long id) {
+        return recipeService.read(id);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public Recipe updateRecipe(@PathVariable("id") int id) {
-        return new Recipe();
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public Recipe updateRecipe(@ModelAttribute Recipe recipe) {
+        recipeService.update(recipe);
+        return recipeService.read(recipe.getId());
     }
 
 
