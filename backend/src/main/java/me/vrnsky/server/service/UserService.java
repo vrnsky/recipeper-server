@@ -15,19 +15,19 @@ public class UserService {
         this.repository = repository;
     }
 
-    public void addUser(User user) {
-        this.repository.save(user);
+    public void registerOrUpdate(User user) {
+        repository.save(user);
     }
 
-    public void editUser(User user) {
-        //TODO implement
+    public User getById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("User with given id not exists!"));
     }
 
-    public User getById(int id) {
-        return this.repository.findById(id);
+    public User findByCredits(String email, String password) {
+        return repository.findByEmailAndPassword(email, password);
     }
 
     public void deleteUser(User user) {
-        this.repository.delete(user);
+        repository.delete(user);
     }
 }

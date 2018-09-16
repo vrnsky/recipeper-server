@@ -21,7 +21,7 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public User registerUser(@ModelAttribute User user) {
-        this.userService.addUser(user);
+        this.userService.registerOrUpdate(user);
         return this.userService.getById(user.getId());
     }
 

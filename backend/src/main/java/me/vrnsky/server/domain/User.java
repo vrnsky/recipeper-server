@@ -1,20 +1,27 @@
 package me.vrnsky.server.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }
