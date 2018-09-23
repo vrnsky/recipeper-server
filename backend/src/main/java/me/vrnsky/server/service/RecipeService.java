@@ -1,13 +1,13 @@
 package me.vrnsky.server.service;
 
 import me.vrnsky.server.domain.Recipe;
+import me.vrnsky.server.exception.RecipeNotFoundException;
 import me.vrnsky.server.repository.interfaces.RecipeRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -27,7 +27,7 @@ public class RecipeService {
     }
 
     public Recipe read(Long id) {
-        return recipeRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Recipe with given id not exists!"));
+        return recipeRepo.findById(id).orElseThrow(() -> new RecipeNotFoundException("Recipe with given id not exists!"));
     }
 
     public void update(Recipe recipe) {
