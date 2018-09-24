@@ -1,6 +1,7 @@
 package me.vrnsky.server.service;
 
 import me.vrnsky.server.domain.Product;
+import me.vrnsky.server.exception.ProductNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class ProductServiceTest {
     }
 
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = ProductNotFoundException.class)
     public void whenRemoveProductFromDatabaseShouldCheckThatProductDeleted() {
         Product product = new Product("potato", "from ground");
         productService.create(product);
