@@ -1,6 +1,7 @@
 package me.vrnsky.server.service;
 
 import me.vrnsky.server.domain.Recipe;
+import me.vrnsky.server.exception.RecipeNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class RecipeServiceTest {
         assertThat(actual.getDescription(), is("3"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = RecipeNotFoundException.class)
     public void whenRemoveRecipeShouldCheckThatIsRemoved() {
         Recipe recipe = new Recipe("1", "2");
         recipeService.create(recipe);

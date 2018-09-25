@@ -1,6 +1,7 @@
 package me.vrnsky.server.service;
 
 import me.vrnsky.server.domain.User;
+import me.vrnsky.server.exception.UserNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class UserServiceTest {
         assertThat(actual, is(user));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = UserNotFoundException.class)
     public void whenDeleteUserShouldCheckThatUserWasDeleted() {
         User user = new User("admin", "admin");
         userService.registerOrUpdate(user);
