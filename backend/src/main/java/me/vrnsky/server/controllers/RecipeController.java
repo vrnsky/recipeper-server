@@ -3,6 +3,7 @@ package me.vrnsky.server.controllers;
 import me.vrnsky.server.domain.Recipe;
 import me.vrnsky.server.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class RecipeController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public List<Recipe> list() {
         return recipeService.list();
     }
@@ -38,6 +40,7 @@ public class RecipeController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public Recipe updateRecipe(@ModelAttribute Recipe recipe) {
         recipeService.update(recipe);
         return recipeService.read(recipe.getId());
