@@ -1,16 +1,6 @@
 language: java
 jdk:
-    - oraclejdk8
-before_deploy:
-    - git config --local user.name "vrnsky"
-    - git config --local user.email "vrnsky@protonmai.ch"
-    - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-    - git tag $TRAVIS_TAG
-deploy:
-    provider: releases
-    api_key: "3727dfc4366e8dabfb3720c442bd193c4710a3f6"
-    file: "./target/recipeper-0.1-SNAPSHOT.jar"
-    skip_cleanup: true
-    draft: true
-    on:
-        tags: true
+  - oraclejdk8
+
+script:
+  - ./gradlew build --scan -s
