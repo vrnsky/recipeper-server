@@ -53,7 +53,7 @@ release {
     ]
 
     git {
-        requireBranch = 'gradle'
+        requireBranch = 'master'
         pushToRemote = 'origin'
         pushToBranchPrefix = ''
         commitVersionFileOnly = false
