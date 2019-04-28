@@ -1,13 +1,15 @@
-import java.util.regex.Matcher
-
 plugins {
     id 'org.springframework.boot' version '2.1.4.RELEASE'
     id 'net.researchgate.release' version '2.6.0'
+    id "com.gorylenko.gradle-git-properties" version "2.0.0"
     id 'java'
 }
 
-apply plugin: 'io.spring.dependency-management'
+springBoot {
+    buildInfo() 
+}
 
+apply plugin: 'io.spring.dependency-management'
 group = 'me.vrnsky'
 sourceCompatibility = '1.8'
 
@@ -21,11 +23,21 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    archiveName="recipeper-server.jar"
+    enabled=true
+}
+
+gitProperties {
+    keys = ['git.commit.id.abbrev']
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile "org.springframework.boot:spring-boot-starter-actuator"
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.postgresql:postgresql'

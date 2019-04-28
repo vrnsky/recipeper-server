@@ -1,1 +1,0 @@
-web: java -Dserver.port=$PORT -jar build/libs/recipeper-server-0.0.3-SNAPSHOT.jar
