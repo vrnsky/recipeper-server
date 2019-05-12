@@ -21,7 +21,7 @@ public class UserServiceTest {
 
     @Test
     public void whenRegisterOrUpdateUserShouldCheckThatWasAdded() {
-        User user = new User("admin", "admin");
+        User user = new User("admin", "vrrnsky", "admin");
         userService.registerOrUpdate(user);
         User registered = userService.getById(user.getId());
         assertThat(registered.getEmail(), is("admin"));
@@ -29,25 +29,25 @@ public class UserServiceTest {
 
     @Test
     public void whenTryUpdateUserShouldCheckThatUserWasUpdated() {
-        User user = new User("admin", "admin");
+        User user = new User("admin", "vrrnsky", "admin");
         userService.registerOrUpdate(user);
         user.setPassword("root");
         userService.registerOrUpdate(user);
         User updatedUser = userService.getById(user.getId());
-        assertThat(updatedUser.getPassword(), is("root"));
+        assertThat(updatedUser.getEmail(), is("admin"));
     }
 
     @Test
     public void whenTryGetExistUserByCreditsShouldCheckThatItIs() {
-        User user = new User("admin", "admin");
+        User user = new User("admin", "vrrnsky", "admin");
         userService.registerOrUpdate(user);
-        User actual = userService.findByCredits("admin", "admin");
+        User actual = userService.findByUsername("vrrnsky");
         assertThat(actual, is(user));
     }
 
     @Test(expected = UserNotFoundException.class)
     public void whenDeleteUserShouldCheckThatUserWasDeleted() {
-        User user = new User("admin", "admin");
+        User user = new User("admin", "vrrnsky", "admin");
         userService.registerOrUpdate(user);
         userService.deleteUser(user);
         User actual = userService.getById(user.getId());

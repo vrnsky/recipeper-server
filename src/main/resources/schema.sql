@@ -1,6 +1,7 @@
 create table usr (
 id serial primary key,
 email varchar(64),
+username varchar(64),
 password varchar(120)
 );
 
