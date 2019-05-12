@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/vrnsky/recipeper-server.svg?branch=master)](https://travis-ci.org/vrnsky/recipeper-server)
+
+
 # recipeper-server
 
 [EN](#en) | [RU](#ru)
@@ -9,13 +12,11 @@ Sometimes it happens that you are too lazy to go to the store and you decide, so
 
 ### Using technology
 * Spring Boot 2 at the backend
+* Gradle as build tools
 * Vue JS at the frontend
 
-### Changelog
-There place reserved for changes related from releases.
-
-### TODO
-What will be done
+### Have an feature request or face with bug?
+Create issue at this repository or you may make it on [board](https://app.gitkraken.com/glo/board/XFzAHJ8txgAPa4i4)
 
 It is all :fire:
 
@@ -25,12 +26,10 @@ It is all :fire:
 
 ### Используемые технологии
 * Spring Boot как основной фрэймворк
-* Apache Maven как build tools
+* Gradle как систему сборки
+* VueJS на фронте
 
-### Changelog
-Тут будут изменения и даты релизов
-
-### TODO
-Тут будет размещена информация о том, что необходимо сделать.
+### Есть идея для нового функционала или нашли багу?
+Создайте issue здесь или на на нашей [доске](https://app.gitkraken.com/glo/board/XFzAHJ8txgAPa4i4)
 
 На этом пока все :fire:
