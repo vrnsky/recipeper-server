@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/vrnsky/recipeper-server.svg?branch=master)](https://travis-ci.org/vrnsky/recipeper-server)
-
-
+[![codecov](https://codecov.io/gh/vrnsky/recipeper-server/branch/master/graph/badge.svg)](https://codecov.io/gh/vrnsky/recipeper-server)
+[![codebeat badge](https://codebeat.co/badges/4c0d3170-91f8-4530-ad53-c9954c860319)](https://codebeat.co/projects/github-com-vrnsky-recipeper-server-master)
 # recipeper-server
 
 [EN](#en) | [RU](#ru)
