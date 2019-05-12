@@ -3,17 +3,24 @@ package me.vrnsky.server.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.vrnsky.server.dto.ResponseStatus;
 import me.vrnsky.server.dto.registration.RegistrationRequest;
+import me.vrnsky.server.service.EmailService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -27,6 +34,15 @@ public class UserControllerTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     @Autowired
     private MockMvc mockMvc;
+    @MockBean
+    private EmailService emailService;
+
+    @Before
+    public void setUp() {
+        doNothing()
+                .when(emailService).send(anyString(), anyString(), anyString());
+    }
+
 
     @Test
     public void whenTryRegisterUserShouldCheckThatUserWasRegistered() throws Exception {
@@ -41,6 +57,8 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.status").value(is(ResponseStatus.SUCCESS.name())))
                 .andExpect(jsonPath("$.message").value(is("")))
                 .andDo(print());
+
+        verify(emailService).send(request.getEmail(), "Welcome", "To the Recipeper");
     }
 
     @Test

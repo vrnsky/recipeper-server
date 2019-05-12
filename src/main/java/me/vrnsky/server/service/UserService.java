@@ -13,18 +13,20 @@ import javax.annotation.Resource;
 public class UserService {
 
     private UserRepo repository;
-
-    @Resource
     private PasswordEncoder passwordEncoder;
+    private EmailService emailService;
 
     @Autowired
-    public UserService(UserRepo repository) {
+    public UserService(UserRepo repository, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
-    public void registerOrUpdate(User user) {
+    public void register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
+        emailService.send(user.getEmail(), "Welcome", "To the Recipeper");
     }
 
     public User getById(Long id) {

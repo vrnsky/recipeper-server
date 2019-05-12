@@ -41,7 +41,7 @@ public class UserController {
         Set<ConstraintViolation<RegistrationRequest>> validationResult = this.validator.validate(request);
         if (validationResult.isEmpty()) {
             User user = new User(request.getEmail(), request.getUsername(), request.getPassword());
-            userService.registerOrUpdate(user);
+            userService.register(user);
             response.setStatus(ResponseStatus.SUCCESS);
             response.setMessage("");
         } else {
