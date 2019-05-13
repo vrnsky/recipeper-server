@@ -4,3 +4,6 @@ jdk:
 
 script:
   - ./gradlew build --scan -s
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
