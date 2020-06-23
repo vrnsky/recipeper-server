@@ -1,0 +1,5 @@
+me/vrnsky/server/service/UserServiceTest.class
+me/vrnsky/server/controllers/UserControllerTest.class
+me/vrnsky/server/service/RecipeServiceTest.class
+me/vrnsky/server/service/ProductServiceTest.class
+me/vrnsky/server/controllers/RecipeControllerTest.class
