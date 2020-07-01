@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+//TODO could not exists without a)recipe and b)measurement
 @Data
 @Entity
 @NoArgsConstructor

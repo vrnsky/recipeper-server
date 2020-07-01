@@ -11,10 +11,10 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    private ProductRepo productRepo;
+    private final ProductRepo productRepo;
 
     @Autowired
-    public ProductService(ProductRepo repo) {
+    public ProductService(final ProductRepo repo) {
         this.productRepo = repo;
     }
 

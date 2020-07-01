@@ -16,11 +16,4 @@ public class UserControllerTest {
 
     @Autowired
     private UserController userController;
-
-    @Test
-    public void whenTryRegisterUserShouldCheckThatUserWasRegistered() {
-        User user = new User("mail", "password");
-        User registeredUser = userController.registerUser(user);
-        assertThat(registeredUser.getEmail(), is(user.getEmail()));
-    }
 }

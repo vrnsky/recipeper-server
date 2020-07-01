@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,7 +28,6 @@ public class Recipe {
         this.title = title;
         this.description = description;
     }
-
 
 //    private User author;
 //    private List<Product> productList;
