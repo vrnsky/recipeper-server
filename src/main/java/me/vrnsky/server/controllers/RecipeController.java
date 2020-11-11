@@ -1,24 +1,24 @@
 package me.vrnsky.server.controllers;
 
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import me.vrnsky.server.domain.Recipe;
 import me.vrnsky.server.service.RecipeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/recipe")
+@RequiredArgsConstructor
 public class RecipeController {
 
-    private RecipeService recipeService;
-
-    @Autowired
-    public RecipeController(RecipeService service) {
-        this.recipeService = service;
-    }
+    private final RecipeService recipeService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void addRecipe(@ModelAttribute Recipe recipe) {

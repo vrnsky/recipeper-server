@@ -16,7 +16,7 @@ public class UserService {
         this.repository = repository;
     }
 
-    public void registerOrUpdate(User user) {
+    public void register(User user) {
         repository.save(user);
     }
 
