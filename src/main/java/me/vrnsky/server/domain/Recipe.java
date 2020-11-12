@@ -28,8 +28,4 @@ public class Recipe {
         this.description = description;
     }
 
-
-//    private User author;
-//    private List<Product> productList;
-
 }

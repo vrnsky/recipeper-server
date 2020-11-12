@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import me.vrnsky.server.domain.Recipe;
 import me.vrnsky.server.service.RecipeService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +21,7 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public void addRecipe(@ModelAttribute Recipe recipe) {
+    public void addRecipe(@RequestBody Recipe recipe) {
         recipeService.create(recipe);
     }
 
@@ -41,7 +41,7 @@ public class RecipeController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public Recipe updateRecipe(@ModelAttribute Recipe recipe) {
+    public Recipe updateRecipe(@RequestBody Recipe recipe) {
         recipeService.update(recipe);
         return recipeService.read(recipe.getId());
     }
