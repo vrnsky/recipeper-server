@@ -1,6 +1,5 @@
 package me.vrnsky.server.controllers;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.vrnsky.server.domain.Recipe;
