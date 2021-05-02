@@ -1,5 +1,6 @@
 package me.vrnsky.server.service;
 
+import me.vrnsky.server.DatabaseTest;
 import me.vrnsky.server.domain.Product;
 import me.vrnsky.server.exception.ProductNotFoundException;
 import org.junit.Test;
@@ -11,11 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductServiceTest {
+public class ProductServiceTest extends DatabaseTest {
 
     @Autowired
     private ProductService productService;
