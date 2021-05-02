@@ -1,16 +1,10 @@
-create table usr (
-  ID serial primary key,
-  EMAIL varchar(64),
-  PASSWORD varchar(120)
-);
-
-create table recipes (
+CREATE TABLE IF NOT EXISTS RECIPES (
  ID serial primary key,
  TITLE varchar(200),
  DESCRIPTION varchar(2000)
 );
 
-create table products (
+CREATE TABLE IF NOT EXISTS PRODUCTS (
   ID serial primary key,
   NAME varchar(200),
   DESCRIPTION varchar(2000)
