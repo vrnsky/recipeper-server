@@ -1,5 +1,6 @@
 package me.vrnsky.server.service;
 
+import lombok.RequiredArgsConstructor;
 import me.vrnsky.server.domain.Product;
 import me.vrnsky.server.exception.ProductNotFoundException;
 import me.vrnsky.server.repository.interfaces.ProductRepo;
@@ -9,14 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
-    private ProductRepo productRepo;
-
-    @Autowired
-    public ProductService(ProductRepo repo) {
-        this.productRepo = repo;
-    }
+    private final ProductRepo productRepo;
 
     public void create(Product product) {
         productRepo.save(product);

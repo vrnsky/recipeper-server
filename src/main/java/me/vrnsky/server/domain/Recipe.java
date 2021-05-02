@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "recipes")
+@Table(name = "RECIPES")
 @ToString
 public class Recipe {
 
@@ -17,10 +17,10 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "DESCRIPTION")
     private String description;
 
     public Recipe(String title, String description) {
