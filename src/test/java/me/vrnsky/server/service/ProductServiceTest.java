@@ -11,8 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,8 +24,8 @@ public class ProductServiceTest extends DatabaseTest {
     public void whenCreateAProductShouldCheckThatProductWasAdded() {
         Product product = new Product("potato", "from ground");
         productService.create(product);
-        Product actual = productService.findById(product.getId());
-        assertThat(actual, is(product));
+        Product actualProduct = productService.findById(product.getId());
+        assertEquals("Product was not saved properly", product, actualProduct);
     }
 
     @Test
@@ -36,7 +35,7 @@ public class ProductServiceTest extends DatabaseTest {
         product.setName("tomato");
         productService.update(product);
         Product updated = productService.findById(product.getId());
-        assertThat(updated.getName(), is("tomato"));
+        assertEquals("Product was not updated properly", "tomato", updated.getName());
     }
 
     @Test
@@ -46,7 +45,7 @@ public class ProductServiceTest extends DatabaseTest {
         productService.create(potato);
         productService.create(tomato);
         List<Product> actual = productService.findByDescription("from ground");
-        assertThat(actual.size(), is(2));
+        assertEquals("Should be 2 products", 2, actual.size());
     }
 
 
@@ -55,6 +54,6 @@ public class ProductServiceTest extends DatabaseTest {
         Product product = new Product("potato", "from ground");
         productService.create(product);
         productService.delete(product);
-        Product deleted = productService.findById(product.getId());
+        productService.findById(product.getId());
     }
 }

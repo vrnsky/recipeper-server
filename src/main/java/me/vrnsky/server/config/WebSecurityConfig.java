@@ -40,7 +40,7 @@ public class WebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http
                 .authorizeRequests()
-                .antMatchers("/recipe/list").permitAll()
+                .antMatchers("/*").permitAll()
                 .anyRequest().fullyAuthenticated();
     }
 }
