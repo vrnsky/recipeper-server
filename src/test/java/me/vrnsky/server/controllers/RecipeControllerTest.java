@@ -24,6 +24,7 @@ import java.util.Set;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -61,10 +62,30 @@ public class RecipeControllerTest extends DatabaseTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.name()))
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.errorCode").value(0))
                 .andExpect(jsonPath("$.errorMessage").value("Успешно"))
                 .andExpect(jsonPath("$.recipe.title").value("Мой первый рецепт"))
                 .andExpect(jsonPath("$.recipe.description").value("Мой первый рецепт"));
+    }
+
+    @Test
+    public void whenTryToCreateRecipeWithoutNameOrDescriptionShouldBeRejected() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setTitle("");
+        recipe.setDescription("");
+        Set<Product> products = new HashSet<>();
+        Product banana = new Product("Бананы", "Бананы из Эквадора");
+        Product oranges = new Product("Апельсины", "Апельсины из Марокко");
+        products.add(banana);
+        products.add(oranges);
+        recipe.setProducts(products);
+        mockMvc.perform(post("/recipe/create")
+                .content(OBJECT_MAPPER.writeValueAsString(recipe))
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding(StandardCharsets.UTF_8.name()))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -77,6 +98,7 @@ public class RecipeControllerTest extends DatabaseTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.name()))
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.errorCode").value(0))
                 .andExpect(jsonPath("$.errorMessage").value("Успешно"))
                 .andExpect(jsonPath("$.recipe.title").value("Мой первый рецепт"))
@@ -94,6 +116,7 @@ public class RecipeControllerTest extends DatabaseTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.name()))
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.errorCode").value(0))
                 .andExpect(jsonPath("$.errorMessage").value("Успешно"))
                 .andExpect(jsonPath("$.recipe.title").value("Мой обновленный рецепт"))
@@ -106,6 +129,7 @@ public class RecipeControllerTest extends DatabaseTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.name()))
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.errorCode").value(0))
                 .andExpect(jsonPath("$.errorMessage").value("Успешно"));
     }
@@ -120,6 +144,7 @@ public class RecipeControllerTest extends DatabaseTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.name()))
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.errorCode").value(0))
                 .andExpect(jsonPath("$.errorMessage").value("Успешно"))
                 .andExpect(jsonPath("$.recipe.title").value("Мой первый рецепт"))
@@ -133,6 +158,7 @@ public class RecipeControllerTest extends DatabaseTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.name()))
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.errorCode").value(0))
                 .andExpect(jsonPath("$.errorMessage").value("Успешно"))
                 .andExpect(jsonPath("$.recipe.title").value("Мой первый рецепт"))
