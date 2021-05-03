@@ -1,5 +1,6 @@
 package me.vrnsky.server.service;
 
+import me.vrnsky.server.DatabaseTest;
 import me.vrnsky.server.domain.Product;
 import me.vrnsky.server.exception.ProductNotFoundException;
 import org.junit.Test;
@@ -10,12 +11,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductServiceTest {
+public class ProductServiceTest extends DatabaseTest {
 
     @Autowired
     private ProductService productService;
@@ -24,8 +24,8 @@ public class ProductServiceTest {
     public void whenCreateAProductShouldCheckThatProductWasAdded() {
         Product product = new Product("potato", "from ground");
         productService.create(product);
-        Product actual = productService.findById(product.getId());
-        assertThat(actual, is(product));
+        Product actualProduct = productService.findById(product.getId());
+        assertEquals("Product was not saved properly", product, actualProduct);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class ProductServiceTest {
         product.setName("tomato");
         productService.update(product);
         Product updated = productService.findById(product.getId());
-        assertThat(updated.getName(), is("tomato"));
+        assertEquals("Product was not updated properly", "tomato", updated.getName());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ProductServiceTest {
         productService.create(potato);
         productService.create(tomato);
         List<Product> actual = productService.findByDescription("from ground");
-        assertThat(actual.size(), is(2));
+        assertEquals("Should be 2 products", 2, actual.size());
     }
 
 
@@ -54,6 +54,6 @@ public class ProductServiceTest {
         Product product = new Product("potato", "from ground");
         productService.create(product);
         productService.delete(product);
-        Product deleted = productService.findById(product.getId());
+        productService.findById(product.getId());
     }
 }

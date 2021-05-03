@@ -1,5 +1,7 @@
 package me.vrnsky.server.service;
 
+import me.vrnsky.server.DatabaseTest;
+import me.vrnsky.server.controllers.dto.recipe.GetRecipeResponse;
 import me.vrnsky.server.domain.Recipe;
 import me.vrnsky.server.exception.RecipeNotFoundException;
 import org.junit.Test;
@@ -8,25 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RecipeServiceTest {
+public class RecipeServiceTest extends DatabaseTest {
 
     @Autowired
     private RecipeService recipeService;
 
     @Test
     public void whenCreateARecipeShouldCheckThatWasAdded() {
-        Recipe recipe = new Recipe("potato with tomato", "step 1. clear");
+        Recipe recipe = new Recipe("Вкусная картошка", "Это очень вкусная картошка");
         recipeService.create(recipe);
-        Recipe actual = recipeService.read(recipe.getId());
-        assertThat(actual.getTitle(), is("potato with tomato"));
+        GetRecipeResponse actual = recipeService.read(recipe.getId());
+        assertEquals("Вкусная картошка",actual.getRecipe().getTitle());
     }
 
     @Test
@@ -35,8 +33,8 @@ public class RecipeServiceTest {
         recipeService.create(recipe);
         recipe.setDescription("3");
         recipeService.update(recipe);
-        Recipe actual = recipeService.read(recipe.getId());
-        assertThat(actual.getDescription(), is("3"));
+        GetRecipeResponse actual = recipeService.read(recipe.getId());
+        assertEquals("3", actual.getRecipe().getDescription());
     }
 
     @Test(expected = RecipeNotFoundException.class)
@@ -44,6 +42,6 @@ public class RecipeServiceTest {
         Recipe recipe = new Recipe("1", "2");
         recipeService.create(recipe);
         recipeService.delete(recipe);
-        assertThat(recipeService.read(recipe.getId()), is(nullValue()));
+        recipeService.read(recipe.getId());
     }
 }
